@@ -680,22 +680,22 @@ namespace OpenMcdf
         {
             if (header.MiniSectorShift != 6)
             {
-                throw new CFCorruptedFileException("Mini sector Shift MUST be 0x06");
+                throw new FileFormatException("Mini sector Shift MUST be 0x06");
             }
 
             if ((header.MajorVersion == 0x0003 && header.SectorShift != 9) || (header.MajorVersion == 0x0004 && header.SectorShift != 0x000c))
             {
-                throw new CFCorruptedFileException("Sector Shift MUST be 0x0009 for Major Version 3 and 0x000c for Major Version 4");
+                throw new FileFormatException("Sector Shift MUST be 0x0009 for Major Version 3 and 0x000c for Major Version 4");
             }
 
             if (header.MinSizeStandardStream != 4096)
             {
-                throw new CFCorruptedFileException("Mini Stream Cut off size MUST be 4096 byte");
+                throw new FileFormatException("Mini Stream Cut off size MUST be 4096 byte");
             }
 
             if (header.ByteOrder != 0xFFFE)
             {
-                throw new CFCorruptedFileException("Byte order MUST be little endian (0xFFFE)");
+                throw new FileFormatException("Byte order MUST be little endian (0xFFFE)");
             }
 
         }
@@ -1303,7 +1303,7 @@ namespace OpenMcdf
                             this.Close();
 
                         if (this.validationExceptionEnabled)
-                            throw new CFCorruptedFileException("DIFAT sectors count mismatched. Corrupted compound file");
+                            throw new FileFormatException("DIFAT sectors count mismatched. Corrupted compound file");
                     }
 
                     s = sectors[nextSecID];
@@ -1331,7 +1331,7 @@ namespace OpenMcdf
 
             if (!processedSectors.Add(nextSecID))
             {
-                throw new CFCorruptedFileException("The file is corrupted.");
+                throw new FileFormatException("The file is corrupted.");
             }
         }
 
@@ -1459,10 +1459,10 @@ namespace OpenMcdf
                 if (nextSecID == Sector.ENDOFCHAIN) break;
 
                 if (nextSecID < 0)
-                    throw new CFCorruptedFileException(string.Format("Next Sector ID reference is below zero. NextID : {0}", nextSecID));
+                    throw new FileFormatException(string.Format("Next Sector ID reference is below zero. NextID : {0}", nextSecID));
 
                 if (nextSecID >= sectors.Count)
-                    throw new CFCorruptedFileException(string.Format("Next Sector ID reference an out of range sector. NextID : {0} while sector count {1}", nextSecID, sectors.Count));
+                    throw new FileFormatException(string.Format("Next Sector ID reference an out of range sector. NextID : {0} while sector count {1}", nextSecID, sectors.Count));
 
                 Sector s = sectors[nextSecID];
                 if (s == null)
@@ -1778,7 +1778,7 @@ namespace OpenMcdf
                     if (this.validationExceptionEnabled)
                     {
                         //this.Close();
-                        throw new CFCorruptedFileException("A Directory Entry references the non-existent sid number " + sid.ToString());
+                        throw new FileFormatException("A Directory Entry references the non-existent sid number " + sid.ToString());
                     }
                     else
                         return false;
@@ -1790,7 +1790,7 @@ namespace OpenMcdf
                     if (this.validationExceptionEnabled)
                     {
                         //this.Close();
-                        throw new CFCorruptedFileException("A Directory Entry has a valid reference to an Invalid Storage Type directory [" + sid + "]");
+                        throw new FileFormatException("A Directory Entry has a valid reference to an Invalid Storage Type directory [" + sid + "]");
                     }
                     else
                         return false;
@@ -1802,14 +1802,14 @@ namespace OpenMcdf
                     if (this.validationExceptionEnabled)
                     {
                         //this.Close();
-                        throw new CFCorruptedFileException("A Directory Entry has an invalid Storage Type");
+                        throw new FileFormatException("A Directory Entry has an invalid Storage Type");
                     }
                     else
                         return false;
                 }
 
                 if (levelSIDs.Contains(sid))
-                    throw new CFCorruptedFileException("Cyclic reference of directory item");
+                    throw new FileFormatException("Cyclic reference of directory item");
 
                 return true; //No fault condition encountered for sid being validated
             }
@@ -1827,7 +1827,7 @@ namespace OpenMcdf
                 = GetSectorChain(header.FirstDirectorySectorID, SectorType.Normal);
 
             if (!(directoryChain.Count > 0))
-                throw new CFCorruptedFileException("Directory sector chain MUST contain at least 1 sector");
+                throw new FileFormatException("Directory sector chain MUST contain at least 1 sector");
 
             if (header.FirstDirectorySectorID == Sector.ENDOFCHAIN)
                 header.FirstDirectorySectorID = directoryChain[0].Id;

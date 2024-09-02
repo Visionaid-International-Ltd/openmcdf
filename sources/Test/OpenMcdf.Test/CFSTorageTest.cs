@@ -214,7 +214,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex is CFCorruptedFileException);
+                Assert.IsTrue(ex is FileFormatException);
                 Assert.IsTrue(f != null && f.IsClosed);
 
             }
@@ -498,7 +498,7 @@ namespace OpenMcdf.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(OpenMcdf.CFCorruptedFileException))]
+        [ExpectedException(typeof(FileFormatException))]
         public void Test_CORRUPTEDDOC_BUG36_SHOULD_THROW_CORRUPTED_FILE_EXCEPTION()
         {
             using (CompoundFile file = new CompoundFile("CorruptedDoc_bug36.doc", CFSUpdateMode.ReadOnly, CFSConfiguration.NoValidationException))

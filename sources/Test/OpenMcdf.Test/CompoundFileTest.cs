@@ -609,7 +609,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex is CFCorruptedFileException);
+                Assert.IsTrue(ex is FileFormatException);
             }
             finally
             {
@@ -742,7 +742,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception exc)
             {
-                Assert.IsInstanceOfType(exc, typeof(CFCorruptedFileException));
+                Assert.IsInstanceOfType(exc, typeof(FileFormatException));
             }
 
             using (var cf = new CompoundFile("report.xls"))
@@ -1024,7 +1024,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(CFCorruptedFileException));
+                Assert.IsInstanceOfType(ex, typeof(FileFormatException));
                 if (f != null)
                     f.Close();
             }
@@ -1101,7 +1101,7 @@ namespace OpenMcdf.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(CFCorruptedFileException))]
+        [ExpectedException(typeof(FileFormatException))]
         public void Test_CorruptedSectorChain_Doc()
         {
             var f = new CompoundFile("corrupted-sector-chain.doc");
@@ -1110,7 +1110,7 @@ namespace OpenMcdf.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(CFCorruptedFileException))]
+        [ExpectedException(typeof(FileFormatException))]
         public void Test_CorruptedSectorChain_Cfs()
         {
             var f = new CompoundFile("corrupted-sector-chain.cfs");
@@ -1139,7 +1139,7 @@ namespace OpenMcdf.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(CFCorruptedFileException))]
+        [ExpectedException(typeof(FileFormatException))]
         public void Test_CorruptedSectorChain_Doc2()
         {
             var f = new CompoundFile("corrupted-sector-chain-2.doc");
@@ -1245,7 +1245,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(CFCorruptedFileException));
+                Assert.IsInstanceOfType(ex, typeof(FileFormatException));
             }
         }
 
