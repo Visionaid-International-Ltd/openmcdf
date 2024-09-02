@@ -1042,7 +1042,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(CFException));
+                Assert.IsInstanceOfType(ex, typeof(FileFormatException));
                 if (f != null)
                     f.Close();
             }
