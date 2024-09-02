@@ -733,12 +733,11 @@ namespace OpenMcdf
 
         private void LoadStream(Stream stream)
         {
-            if (stream == null)
-                throw new CFException("Stream parameter cannot be null");
+            if (stream is null)
+                throw new ArgumentNullException(nameof(stream));
 
             if (!stream.CanSeek)
-                throw new CFException("Cannot load a non-seekable Stream");
-
+                throw new ArgumentException("Stream must support seeking", nameof(stream));
 
             stream.Seek(0, SeekOrigin.Begin);
 

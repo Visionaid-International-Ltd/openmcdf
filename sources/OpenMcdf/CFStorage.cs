@@ -80,8 +80,10 @@ namespace OpenMcdf
         internal CFStorage(CompoundFile compFile, IDirectoryEntry dirEntry)
             : base(compFile)
         {
-            if (dirEntry == null || dirEntry.SID < 0)
-                throw new CFException("Attempting to create a CFStorage using an uninitialized directory");
+            if (dirEntry is null)
+                throw new ArgumentNullException(nameof(dirEntry));
+            if (dirEntry.SID < 0)
+                throw new ArgumentException("Attempting to create a CFStorage using an uninitialized directory", nameof(dirEntry));
 
             this.DirEntry = dirEntry;
         }
@@ -126,10 +128,10 @@ namespace OpenMcdf
         {
             CheckDisposed();
 
+            if (streamName is null)
+                throw new ArgumentNullException(nameof(streamName));
             if (string.IsNullOrEmpty(streamName))
-                throw new CFException("Stream name cannot be null or empty");
-
-
+                throw new ArgumentException("Stream name cannot be null or empty");
 
             IDirectoryEntry dirEntry = DirectoryEntry.TryNew(streamName, StgType.StgStream, this.CompoundFile.GetDirectories());
 
@@ -441,8 +443,11 @@ namespace OpenMcdf
         {
             CheckDisposed();
 
+            if (storageName is null)
+                throw new ArgumentNullException(nameof(storageName));
+
             if (string.IsNullOrEmpty(storageName))
-                throw new CFException("Stream name cannot be null or empty");
+                throw new ArgumentException("Stream name cannot be null or empty", nameof(storageName));
 
             // Add new Storage directory entry
             IDirectoryEntry cfo
@@ -560,7 +565,7 @@ namespace OpenMcdf
             //    throw new CFException("Entry named [" + entryName + "] has not the correct type");
 
             if (((IDirectoryEntry)foundObj).StgType == StgType.StgRoot)
-                throw new CFException("Root storage cannot be removed");
+                throw new ArgumentException("Root storage cannot be removed", nameof(entryName));
 
 
             IRBNode altDel = null;

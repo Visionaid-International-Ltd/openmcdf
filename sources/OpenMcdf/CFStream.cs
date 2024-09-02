@@ -6,6 +6,7 @@
  * 
  * The Initial Developer of the Original Code is Federico Blaseotto.*/
 
+using System;
 using System.IO;
 
 
@@ -23,8 +24,10 @@ namespace OpenMcdf
         internal CFStream(CompoundFile compoundFile, IDirectoryEntry dirEntry)
             : base(compoundFile)
         {
-            if (dirEntry == null || dirEntry.SID < 0)
-                throw new CFException("Attempting to add a CFStream using an uninitialized directory");
+            if (dirEntry is null)
+                throw new ArgumentNullException(nameof(dirEntry));
+            if (dirEntry.SID < 0)
+                throw new ArgumentException("Attempting to add a CFStream using an uninitialized directory", nameof(dirEntry));
 
             this.DirEntry = dirEntry;
         }
