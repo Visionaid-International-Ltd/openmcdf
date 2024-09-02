@@ -195,7 +195,7 @@ namespace OpenMcdf
             }
             else
             {
-                throw new CFItemNotFound("Cannot find item [" + streamName + "] within the current storage");
+                throw new KeyNotFoundException("Cannot find item [" + streamName + "] within the current storage");
             }
         }
 
@@ -325,7 +325,7 @@ namespace OpenMcdf
             }
             else
             {
-                throw new CFItemNotFound("Cannot find item [" + storageName + "] within the current storage");
+                throw new KeyNotFoundException("Cannot find item [" + storageName + "] within the current storage");
             }
         }
 
@@ -554,7 +554,7 @@ namespace OpenMcdf
             this.Children.TryLookup(tmp, out foundObj);
 
             if (foundObj == null)
-                throw new CFItemNotFound("Entry named [" + entryName + "] was not found");
+                throw new KeyNotFoundException("Entry named [" + entryName + "] was not found");
 
             //if (foundObj.GetType() != typeCheck)
             //    throw new CFException("Entry named [" + entryName + "] has not the correct type");
@@ -657,7 +657,7 @@ namespace OpenMcdf
             {
                 ((DirectoryEntry)item).SetEntryName(newItemName);
             }
-            else throw new CFItemNotFound("Item " + oldItemName + " not found in Storage");
+            else throw new KeyNotFoundException("Item " + oldItemName + " not found in Storage");
 
             children = null;
             children = LoadChildren(this.DirEntry.SID); //Rethread

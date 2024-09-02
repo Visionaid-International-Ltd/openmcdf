@@ -620,7 +620,7 @@ namespace OpenMcdf.Test
             catch (Exception ex)
             {
                 Assert.IsNull(zeroStream2);
-                Assert.IsInstanceOfType(ex, typeof(CFItemNotFound));
+                Assert.IsInstanceOfType(ex, typeof(KeyNotFoundException));
             }
 
             cf2.Save("MultipleDeleteMiniStream.cfs");

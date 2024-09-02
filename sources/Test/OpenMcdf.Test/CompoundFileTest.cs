@@ -416,7 +416,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                if (ex is CFItemNotFound)
+                if (ex is KeyNotFoundException)
                     catched = true;
             }
 
@@ -430,7 +430,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                if (ex is CFItemNotFound)
+                if (ex is KeyNotFoundException)
                     catched = true;
             }
 
@@ -544,7 +544,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex is CFItemNotFound);
+                Assert.IsTrue(ex is KeyNotFoundException);
             }
 
             cfTest.Close();
