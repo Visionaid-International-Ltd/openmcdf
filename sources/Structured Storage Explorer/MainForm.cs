@@ -312,7 +312,7 @@ namespace StructuredStorageExplorer
                     {
                         ((CFStorage)cfs).AddStream(streamName);
                     }
-                    catch (CFDuplicatedItemException)
+                    catch (ArgumentException)
                     {
                         MessageBox.Show("Cannot insert a duplicated item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -337,7 +337,7 @@ namespace StructuredStorageExplorer
                     {
                         ((CFStorage)cfs).AddStorage(storage);
                     }
-                    catch (CFDuplicatedItemException)
+                    catch (ArgumentException)
                     {
                         MessageBox.Show("Cannot insert a duplicated item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

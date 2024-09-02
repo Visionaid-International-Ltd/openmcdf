@@ -150,7 +150,7 @@ namespace OpenMcdf
             {
                 CompoundFile.ResetDirectoryEntry(dirEntry.SID);
 
-                throw new CFDuplicatedItemException("An entry with name '" + streamName + "' is already present in storage '" + this.Name + "' ");
+                throw new ArgumentException("An entry with name '" + streamName + "' is already present in storage '" + this.Name + "' ", nameof(streamName));
             }
 
             return new CFStream(this.CompoundFile, dirEntry);
@@ -464,7 +464,7 @@ namespace OpenMcdf
             {
                 CompoundFile.ResetDirectoryEntry(cfo.SID);
                 cfo = null;
-                throw new CFDuplicatedItemException("An entry with name '" + storageName + "' is already present in storage '" + this.Name + "' ");
+                throw new ArgumentException("An entry with name '" + storageName + "' is already present in storage '" + this.Name + "' ", nameof(storageName));
             }
 
             IDirectoryEntry childrenRoot = Children.Root as IDirectoryEntry;
