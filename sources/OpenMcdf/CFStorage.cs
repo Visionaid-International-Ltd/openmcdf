@@ -146,7 +146,7 @@ namespace OpenMcdf
                 //... and set the root of the tree as new child of the current item directory entry
                 this.DirEntry.Child = (Children.Root as IDirectoryEntry).SID;
             }
-            catch (RBTreeException)
+            catch (ArgumentException)
             {
                 CompoundFile.ResetDirectoryEntry(dirEntry.SID);
 
@@ -460,7 +460,7 @@ namespace OpenMcdf
                 // Add object to Siblings tree
                 Children.Insert(cfo);
             }
-            catch (RBTreeDuplicatedItemException)
+            catch (ArgumentException)
             {
                 CompoundFile.ResetDirectoryEntry(cfo.SID);
                 cfo = null;

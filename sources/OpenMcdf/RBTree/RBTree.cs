@@ -17,21 +17,6 @@ using System.Diagnostics;
 
 namespace RedBlackTree
 {
-    public class RBTreeException : Exception
-    {
-        public RBTreeException(string msg)
-            : base(msg)
-        {
-        }
-    }
-    public class RBTreeDuplicatedItemException : RBTreeException
-    {
-        public RBTreeDuplicatedItemException(string msg)
-            : base(msg)
-        {
-        }
-    }
-
     public enum Color { RED = 0, BLACK = 1 }
 
     /// <summary>
@@ -217,7 +202,7 @@ namespace RedBlackTree
                     int compResult = newNode.CompareTo(n);
                     if (compResult == 0)
                     {
-                        throw new RBTreeDuplicatedItemException("RBNode " + newNode.ToString() + " already present in tree");
+                        throw new ArgumentException("RBNode " + newNode.ToString() + " already present in tree");
                         //n.Value = value;
                         //return;
                     }
