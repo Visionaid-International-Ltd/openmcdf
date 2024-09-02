@@ -453,7 +453,7 @@ namespace OpenMcdf
                 throw new ObjectDisposedException("Compound File closed: cannot commit data");
 
             if (updateMode != CFSUpdateMode.Update)
-                throw new CFInvalidOperation("Cannot commit data in Read-Only update mode");
+                throw new InvalidOperationException("Cannot commit data in Read-Only update mode");
 
             //try
             //{
@@ -773,7 +773,7 @@ namespace OpenMcdf
                 Sector s = miniSectorChain[i];
 
                 if (s.Id == -1)
-                    throw new CFException("Invalid minisector index");
+                    throw new InvalidOperationException("Invalid minisector index");
 
                 // MiniStream sectors already allocated
                 miniStreamView.Seek(Sector.MINISECTOR_SIZE * s.Id, SeekOrigin.Begin);
@@ -1946,7 +1946,7 @@ namespace OpenMcdf
 
                 if (raiseSaveFileEx)
                 {
-                    throw new CFInvalidOperation("Cannot overwrite current backing file. Compound File should be opened in UpdateMode and Commit() method should be called to persist changes");
+                    throw new InvalidOperationException("Cannot overwrite current backing file. Compound File should be opened in UpdateMode and Commit() method should be called to persist changes");
                 }
 
                 fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
@@ -2009,7 +2009,7 @@ namespace OpenMcdf
                 {
                     if (((FileStream)(this.sourceStream)).Name == ((FileStream)(stream)).Name)
                     {
-                        throw new CFInvalidOperation("Cannot overwrite current backing file. Compound File should be opened in UpdateMode and Commit() method should be called to persist changes");
+                        throw new InvalidOperationException("Cannot overwrite current backing file. Compound File should be opened in UpdateMode and Commit() method should be called to persist changes");
                     }
                 }
 
@@ -2364,10 +2364,10 @@ namespace OpenMcdf
         {
 
             if (buffer == null)
-                throw new CFInvalidOperation("Parameter [buffer] cannot be null");
+                throw new ArgumentNullException(nameof(buffer));
 
             if (cfItem.DirEntry == null)
-                throw new CFException("Internal error [cfItem.DirEntry] cannot be null");
+                throw new InvalidOperationException("Internal error [cfItem.DirEntry] cannot be null");
 
             if (buffer.Length == 0) return;
 

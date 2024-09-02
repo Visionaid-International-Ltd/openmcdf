@@ -207,7 +207,7 @@ namespace OpenMcdf.Extensions.OLEProperties
             // Only the DocumentSummaryInfo stream can contain a UserDefinedProperties
             if (this.ContainerType != ContainerType.DocumentSummaryInfo)
             {
-                throw new CFInvalidOperation($"Only a DocumentSummaryInfo can contain user defined properties. Current container type is {this.ContainerType}");
+                throw new InvalidOperationException($"Only a DocumentSummaryInfo can contain user defined properties. Current container type is {this.ContainerType}");
             }
 
             // Create the container, and add the codepage to the initial set of properties

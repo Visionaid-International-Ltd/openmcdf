@@ -211,10 +211,10 @@ namespace OpenMcdf
 
             set
             {
-                if (this.dirEntry.StgType != StgType.StgStream && this.dirEntry.StgType != StgType.StgRoot)
-                    this.dirEntry.CreationDate = BitConverter.GetBytes((value.ToFileTime()));
-                else
-                    throw new CFException("Creation Date can only be set on storage entries");
+                if (this.dirEntry.StgType == StgType.StgStream || this.dirEntry.StgType == StgType.StgRoot)
+                    throw new InvalidOperationException("Creation Date can only be set on storage entries");
+
+                this.dirEntry.CreationDate = BitConverter.GetBytes((value.ToFileTime()));
             }
         }
 
@@ -230,10 +230,10 @@ namespace OpenMcdf
 
             set
             {
-                if (this.dirEntry.StgType != StgType.StgStream && this.dirEntry.StgType != StgType.StgRoot)
-                    this.dirEntry.ModifyDate = BitConverter.GetBytes((value.ToFileTime()));
-                else
-                    throw new CFException("Modify Date can only be set on storage entries");
+                if (this.dirEntry.StgType == StgType.StgStream || this.dirEntry.StgType == StgType.StgRoot)
+                    throw new InvalidOperationException("Modify Date can only be set on storage entries");
+
+                this.dirEntry.ModifyDate = BitConverter.GetBytes((value.ToFileTime()));
             }
         }
 
@@ -248,12 +248,10 @@ namespace OpenMcdf
             }
             set
             {
-                if (this.dirEntry.StgType != StgType.StgStream)
-                {
-                    this.dirEntry.StorageCLSID = value;
-                }
-                else
-                    throw new CFException("Object class GUID can only be set on Root and Storage entries");
+                if (this.dirEntry.StgType == StgType.StgStream)
+                    throw new InvalidOperationException("Object class GUID can only be set on Root and Storage entries");
+
+                this.dirEntry.StorageCLSID = value;
             }
         }
 

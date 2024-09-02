@@ -73,36 +73,6 @@ namespace OpenMcdf
     }
 
     /// <summary>
-    /// Raised when a method call is invalid for the current object state
-    /// </summary>
-    [Serializable]
-    public class CFInvalidOperation : CFException
-    {
-        public CFInvalidOperation()
-           : base()
-        {
-        }
-
-        protected CFInvalidOperation(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
-        public CFInvalidOperation(string message)
-            : base(message, null)
-        {
-
-        }
-
-        public CFInvalidOperation(string message, Exception innerException)
-            : base(message, innerException)
-        {
-
-        }
-
-    }
-
-    /// <summary>
     /// Raised when trying to add a duplicated CFItem
     /// </summary>
     /// <remarks>
