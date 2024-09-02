@@ -63,7 +63,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_READ_STREAM()
         {
-            String filename = "report.xls";
+            string filename = "report.xls";
 
             CompoundFile cf = new CompoundFile(filename);
             CFStream foundStream = cf.RootStorage.GetStream("Workbook");
@@ -314,7 +314,7 @@ namespace OpenMcdf.Test
         {
             const int BUFFER_LENGTH = 8000;
 
-            String filename = "report.xls";
+            string filename = "report.xls";
 
             byte[] b = Helpers.GetBuffer(BUFFER_LENGTH);
 
@@ -337,7 +337,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_RE_WRITE_SMALLER_MINI_STREAM()
         {
-            String filename = "report.xls";
+            string filename = "report.xls";
 
             CompoundFile cf = new CompoundFile(filename);
             CFStream foundStream = cf.RootStorage.GetStream("\x05SummaryInformation");
@@ -362,8 +362,8 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_TRANSACTED_ADD_STREAM_TO_EXISTING_FILE()
         {
-            String srcFilename = "report.xls";
-            String dstFilename = "reportOverwrite.xls";
+            string srcFilename = "report.xls";
+            string dstFilename = "reportOverwrite.xls";
 
             File.Copy(srcFilename, dstFilename, true);
 
@@ -386,8 +386,8 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_TRANSACTED_ADD_REMOVE_MULTIPLE_STREAM_TO_EXISTING_FILE()
         {
-            String srcFilename = "report.xls";
-            String dstFilename = "reportOverwriteMultiple.xls";
+            string srcFilename = "report.xls";
+            string dstFilename = "reportOverwriteMultiple.xls";
 
             File.Copy(srcFilename, dstFilename, true);
 
@@ -437,8 +437,8 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_TRANSACTED_ADD_MINISTREAM_TO_EXISTING_FILE()
         {
-            String srcFilename = "report.xls";
-            String dstFilename = "reportOverwriteMultiple.xls";
+            string srcFilename = "report.xls";
+            string dstFilename = "reportOverwriteMultiple.xls";
 
             File.Copy(srcFilename, dstFilename, true);
 
@@ -470,8 +470,8 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_TRANSACTED_REMOVE_MINI_STREAM_ADD_MINISTREAM_TO_EXISTING_FILE()
         {
-            String srcFilename = "report.xls";
-            String dstFilename = "reportOverwrite2.xls";
+            string srcFilename = "report.xls";
+            string dstFilename = "reportOverwrite2.xls";
 
             File.Copy(srcFilename, dstFilename, true);
 
@@ -498,7 +498,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_DELETE_STREAM_1()
         {
-            String filename = "MultipleStorage.cfs";
+            string filename = "MultipleStorage.cfs";
 
             CompoundFile cf = new CompoundFile(filename);
             CFStorage cfs = cf.RootStorage.GetStorage("MyStorage");
@@ -511,7 +511,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_DELETE_STREAM_2()
         {
-            String filename = "MultipleStorage.cfs";
+            string filename = "MultipleStorage.cfs";
 
             CompoundFile cf = new CompoundFile(filename);
             CFStorage cfs = cf.RootStorage.GetStorage("MyStorage").GetStorage("AnotherStorage");
@@ -527,7 +527,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_WRITE_AND_READ_CFS()
         {
-            String filename = "WRITE_AND_READ_CFS.cfs";
+            string filename = "WRITE_AND_READ_CFS.cfs";
 
             CompoundFile cf = new CompoundFile();
 
@@ -643,7 +643,7 @@ namespace OpenMcdf.Test
         private void SingleTransactedChange(int size)
         {
 
-            String filename = "INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS.cfs";
+            string filename = "INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS.cfs";
 
             if (File.Exists(filename))
                 File.Delete(filename);
@@ -672,7 +672,7 @@ namespace OpenMcdf.Test
         private void SingleWriteReadMatching(int size)
         {
 
-            String filename = "INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS.cfs";
+            string filename = "INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS.cfs";
 
             if (File.Exists(filename))
                 File.Delete(filename);
@@ -842,7 +842,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_RESIZE_STREAM_TRANSITION_TO_MINI()
         {
-            String FILE_NAME = "$Test_RESIZE_STREAM_TRANSITION_TO_MINI.cfs";
+            string FILE_NAME = "$Test_RESIZE_STREAM_TRANSITION_TO_MINI.cfs";
             CompoundFile cf = null;
 
             byte[] b = Helpers.GetBuffer(1024 * 1024 * 2); //2MB buffer
@@ -1021,7 +1021,7 @@ namespace OpenMcdf.Test
 
             StreamView sv = new StreamView(temp, 512, 4, null, a);
             BinaryReader br = new BinaryReader(sv);
-            Int32 t = br.ReadInt32();
+            int t = br.ReadInt32();
 
             Assert.IsTrue(t == 1);
         }
@@ -1037,7 +1037,7 @@ namespace OpenMcdf.Test
             sv.Write(BitConverter.GetBytes(1), 0, 4);
             sv.Seek(0, SeekOrigin.Begin);
             BinaryReader br = new BinaryReader(sv);
-            Int32 t = br.ReadInt32();
+            int t = br.ReadInt32();
 
             Assert.IsTrue(t == 1);
         }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OpenMcdf.Extensions.OLEProperties
+﻿namespace OpenMcdf.Extensions.OLEProperties
 {
     public enum Behavior
     {
@@ -10,9 +8,9 @@ namespace OpenMcdf.Extensions.OLEProperties
     public class PropertyContext
     {
 
-        public Int32 CodePage { get; set; }
+        public int CodePage { get; set; }
         public Behavior Behavior { get; set; }
-        public UInt32 Locale { get; set; }
+        public uint Locale { get; set; }
     }
 
     public static class WellKnownFMTID

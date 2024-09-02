@@ -62,7 +62,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_CREATE_STORAGE()
         {
-            const String STORAGE_NAME = "NewStorage";
+            const string STORAGE_NAME = "NewStorage";
             CompoundFile cf = new CompoundFile();
 
             CFStorage st = cf.RootStorage.AddStorage(STORAGE_NAME);
@@ -74,7 +74,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_CREATE_STORAGE_WITH_CREATION_DATE()
         {
-            const String STORAGE_NAME = "NewStorage1";
+            const string STORAGE_NAME = "NewStorage1";
             CompoundFile cf = new CompoundFile();
 
             CFStorage st = cf.RootStorage.AddStorage(STORAGE_NAME);
@@ -90,7 +90,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_VISIT_ENTRIES()
         {
-            const String STORAGE_NAME = "report.xls";
+            const string STORAGE_NAME = "report.xls";
             CompoundFile cf = new CompoundFile(STORAGE_NAME);
 
             FileStream output = new FileStream("LogEntries.txt", FileMode.Create);
@@ -111,7 +111,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_TRY_GET_STREAM_STORAGE()
         {
-            String FILENAME = "MultipleStorage.cfs";
+            string FILENAME = "MultipleStorage.cfs";
             CompoundFile cf = new CompoundFile(FILENAME);
 
             CFStorage st = null;
@@ -147,7 +147,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_TRY_GET_STREAM_STORAGE_NEW()
         {
-            String FILENAME = "MultipleStorage.cfs";
+            string FILENAME = "MultipleStorage.cfs";
             CompoundFile cf = new CompoundFile(FILENAME);
             CFStorage st = null;
             bool bs = cf.RootStorage.TryGetStorage("MyStorage", out st);
@@ -279,7 +279,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_VISIT_STORAGE()
         {
-            String FILENAME = "testVisiting.xls";
+            string FILENAME = "testVisiting.xls";
 
             // Remove...
             if (File.Exists(FILENAME))
@@ -325,7 +325,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_DELETE_DIRECTORY()
         {
-            String FILENAME = "MultipleStorage2.cfs";
+            string FILENAME = "MultipleStorage2.cfs";
             CompoundFile cf = new CompoundFile(FILENAME, CFSUpdateMode.ReadOnly, CFSConfiguration.Default);
 
             CFStorage st = cf.RootStorage.GetStorage("MyStorage");
@@ -342,7 +342,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_DELETE_MINISTREAM_STREAM()
         {
-            String FILENAME = "MultipleStorage2.cfs";
+            string FILENAME = "MultipleStorage2.cfs";
             CompoundFile cf = new CompoundFile(FILENAME);
 
             CFStorage found = null;
@@ -360,7 +360,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_DELETE_STREAM()
         {
-            String FILENAME = "MultipleStorage3.cfs";
+            string FILENAME = "MultipleStorage3.cfs";
             CompoundFile cf = new CompoundFile(FILENAME);
 
             CFStorage found = null;
@@ -383,7 +383,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_CHECK_DISPOSED_()
         {
-            const String FILENAME = "MultipleStorage.cfs";
+            const string FILENAME = "MultipleStorage.cfs";
             CompoundFile cf = new CompoundFile(FILENAME);
 
             CFStorage st = cf.RootStorage.GetStorage("MyStorage");

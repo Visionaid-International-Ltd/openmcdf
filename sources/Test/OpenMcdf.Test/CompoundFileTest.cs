@@ -61,7 +61,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_COMPRESS_SPACE()
         {
-            String FILENAME = "MultipleStorage3.cfs"; // 22Kb
+            string FILENAME = "MultipleStorage3.cfs"; // 22Kb
 
             FileInfo srcFile = new FileInfo(FILENAME);
 
@@ -140,7 +140,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_DELETE_WITHOUT_COMPRESSION()
         {
-            String FILENAME = "MultipleStorage3.cfs";
+            string FILENAME = "MultipleStorage3.cfs";
 
             FileInfo srcFile = new FileInfo(FILENAME);
 
@@ -166,7 +166,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_WRITE_AND_READ_CFS_VERSION_4()
         {
-            String filename = "WRITE_AND_READ_CFS_V4.cfs";
+            string filename = "WRITE_AND_READ_CFS_V4.cfs";
 
             CompoundFile cf = new CompoundFile(CFSVersion.Ver_4, CFSConfiguration.EraseFreeSectors | CFSConfiguration.SectorRecycle);
 
@@ -191,7 +191,7 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_WRITE_READ_CFS_VERSION_4_STREAM()
         {
-            String filename = "WRITE_COMMIT_READ_CFS_V4.cfs";
+            string filename = "WRITE_COMMIT_READ_CFS_V4.cfs";
 
             CompoundFile cf = new CompoundFile(CFSVersion.Ver_4, CFSConfiguration.SectorRecycle | CFSConfiguration.EraseFreeSectors);
 
@@ -822,7 +822,7 @@ namespace OpenMcdf.Test
             Assert.IsNotNull(g);
             g = cf.getGuidForStream(3);
             Assert.IsNotNull(g);
-            Assert.IsTrue(!String.IsNullOrEmpty(cf.GetNameDirEntry(2)));
+            Assert.IsTrue(!string.IsNullOrEmpty(cf.GetNameDirEntry(2)));
             Assert.IsTrue(cf.GetNumDirectories() > 0);
         }
         //[TestMethod]
@@ -909,9 +909,9 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_FIX_BUG_GH_14()
         {
-            String filename = "MyFile.dat";
-            String storageName = "MyStorage";
-            String streamName = "MyStream";
+            string filename = "MyFile.dat";
+            string storageName = "MyStorage";
+            string streamName = "MyStream";
             int BUFFER_SIZE = 800 * Mb;
             int iterationCount = 1;
             int streamCount = 3;
@@ -958,9 +958,9 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_FIX_BUG_GH_15()
         {
-            String filename = "MyFile.dat";
-            String storageName = "MyStorage";
-            String streamName = "MyStream";
+            string filename = "MyFile.dat";
+            string storageName = "MyStorage";
+            string streamName = "MyStream";
             int BUFFER_SIZE = 800 * Mb;
             int iterationCount = 1;
             int streamCount = 1;
@@ -1252,8 +1252,8 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_FIX_BUG_94_GrowingSizeSave()
         {
-            String filename = "_Test.ppt";
-            String filename2 = "MyFile4.dat";
+            string filename = "_Test.ppt";
+            string filename2 = "MyFile4.dat";
 
             if (File.Exists(filename2))
                 File.Delete(filename2);
@@ -1285,10 +1285,10 @@ namespace OpenMcdf.Test
         [TestMethod]
         public void Test_FIX_BUG_96_CompoundFile_SaveOverwrite()
         {
-            String filename = "MultipleStorage.cfs";
-            String filename2 = "MyFile2.dat";
-            String storageName = "MyStorage";
-            String streamName = "MyStream";
+            string filename = "MultipleStorage.cfs";
+            string filename2 = "MyFile2.dat";
+            string storageName = "MyStorage";
+            string streamName = "MyStream";
 
             if (File.Exists(filename2))
                 File.Delete(filename2);

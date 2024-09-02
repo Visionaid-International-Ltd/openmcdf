@@ -19,14 +19,14 @@ namespace RedBlackTree
 {
     public class RBTreeException : Exception
     {
-        public RBTreeException(String msg)
+        public RBTreeException(string msg)
             : base(msg)
         {
         }
     }
     public class RBTreeDuplicatedItemException : RBTreeException
     {
-        public RBTreeDuplicatedItemException(String msg)
+        public RBTreeDuplicatedItemException(string msg)
             : base(msg)
         {
         }

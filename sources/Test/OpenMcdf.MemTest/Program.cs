@@ -212,13 +212,13 @@ namespace OpenMcdf.MemTest
             Console.ReadKey();
         }
 
-        private static void AddNodes(String depth, CFStorage cfs)
+        private static void AddNodes(string depth, CFStorage cfs)
         {
 
             Action<CFItem> va = delegate (CFItem target)
             {
 
-                String temp = target.Name + (target is CFStorage ? "" : " (" + target.Size + " bytes )");
+                string temp = target.Name + (target is CFStorage ? "" : " (" + target.Size + " bytes )");
 
                 //Stream
 
@@ -227,7 +227,7 @@ namespace OpenMcdf.MemTest
                 if (target is CFStorage)
                 {  //Storage
 
-                    String newDepth = depth + "    ";
+                    string newDepth = depth + "    ";
 
                     //Recursion into the storage
                     AddNodes(newDepth, (CFStorage)target);
@@ -241,8 +241,8 @@ namespace OpenMcdf.MemTest
 
         public static void TestMultipleStreamCommit()
         {
-            String srcFilename = Directory.GetCurrentDirectory() + @"\testfile\report.xls";
-            String dstFilename = Directory.GetCurrentDirectory() + @"\testfile\reportOverwriteMultiple.xls";
+            string srcFilename = Directory.GetCurrentDirectory() + @"\testfile\report.xls";
+            string dstFilename = Directory.GetCurrentDirectory() + @"\testfile\reportOverwriteMultiple.xls";
             //Console.WriteLine(Directory.GetCurrentDirectory());
             //Console.ReadKey(); 
             File.Copy(srcFilename, dstFilename, true);

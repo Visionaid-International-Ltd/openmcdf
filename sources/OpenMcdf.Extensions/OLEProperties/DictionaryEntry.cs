@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 
 namespace OpenMcdf.Extensions.OLEProperties
@@ -15,7 +14,7 @@ namespace OpenMcdf.Extensions.OLEProperties
 
         public uint PropertyIdentifier { get; set; }
         public int Length { get; set; }
-        public String Name { get { return GetName(); } }
+        public string Name { get { return GetName(); } }
 
         private byte[] nameBytes;
 

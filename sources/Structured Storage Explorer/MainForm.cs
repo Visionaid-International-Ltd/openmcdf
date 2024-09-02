@@ -57,7 +57,7 @@ namespace StructuredStorageExplorer
 
         private void OpenFile()
         {
-            if (!String.IsNullOrEmpty(openFileDialog1.FileName))
+            if (!string.IsNullOrEmpty(openFileDialog1.FileName))
             {
                 CloseCurrentFile();
 
@@ -79,7 +79,7 @@ namespace StructuredStorageExplorer
                 fs.Close();
 
             treeView1.Nodes.Clear();
-            fileNameLabel.Text = String.Empty;
+            fileNameLabel.Text = string.Empty;
             saveAsToolStripMenuItem.Enabled = false;
             updateCurrentFileToolStripMenuItem.Enabled = false;
 
@@ -162,7 +162,7 @@ namespace StructuredStorageExplorer
                 fs?.Close();
 
                 treeView1.Nodes.Clear();
-                fileNameLabel.Text = String.Empty;
+                fileNameLabel.Text = string.Empty;
                 MessageBox.Show("Internal error: " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -222,20 +222,20 @@ namespace StructuredStorageExplorer
             // A lot of stream and storage have only non-printable characters.
             // We need to sanitize filename.
 
-            String sanitizedFileName = String.Empty;
+            string sanitizedFileName = string.Empty;
 
             foreach (char c in target.Name)
             {
                 if (
-                    Char.GetUnicodeCategory(c) == UnicodeCategory.LetterNumber
-                    || Char.GetUnicodeCategory(c) == UnicodeCategory.LowercaseLetter
-                    || Char.GetUnicodeCategory(c) == UnicodeCategory.UppercaseLetter
+                    char.GetUnicodeCategory(c) == UnicodeCategory.LetterNumber
+                    || char.GetUnicodeCategory(c) == UnicodeCategory.LowercaseLetter
+                    || char.GetUnicodeCategory(c) == UnicodeCategory.UppercaseLetter
                     )
 
                     sanitizedFileName += c;
             }
 
-            if (String.IsNullOrEmpty(sanitizedFileName))
+            if (string.IsNullOrEmpty(sanitizedFileName))
             {
                 sanitizedFileName = "tempFileName";
             }
@@ -300,7 +300,7 @@ namespace StructuredStorageExplorer
 
         private void addStreamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string streamName = String.Empty;
+            string streamName = string.Empty;
 
             if (Utils.InputBox("Add stream", "Insert stream name", ref streamName) == DialogResult.OK)
             {
@@ -325,7 +325,7 @@ namespace StructuredStorageExplorer
 
         private void addStorageStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string storage = String.Empty;
+            string storage = string.Empty;
 
             if (Utils.InputBox("Add storage", "Insert storage name", ref storage) == DialogResult.OK)
             {
@@ -349,7 +349,7 @@ namespace StructuredStorageExplorer
 
         private void importDataStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string fileName = String.Empty;
+            string fileName = string.Empty;
 
             if (openDataFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -445,9 +445,9 @@ namespace StructuredStorageExplorer
 
                             DataTable ds = new DataTable();
 
-                            ds.Columns.Add("Name", typeof(String));
-                            ds.Columns.Add("Type", typeof(String));
-                            ds.Columns.Add("Value", typeof(String));
+                            ds.Columns.Add("Name", typeof(string));
+                            ds.Columns.Add("Type", typeof(string));
+                            ds.Columns.Add("Value", typeof(string));
 
                             foreach (var p in c.Properties)
                             {
@@ -456,14 +456,14 @@ namespace StructuredStorageExplorer
                                     for (int h = 0; h < ((IList)p.Value).Count; h++)
                                     {
                                         DataRow dr = ds.NewRow();
-                                        dr.ItemArray = new Object[] { p.PropertyName, p.VTType, ((IList)p.Value)[h] };
+                                        dr.ItemArray = new object[] { p.PropertyName, p.VTType, ((IList)p.Value)[h] };
                                         ds.Rows.Add(dr);
                                     }
                                 }
                                 else
                                 {
                                     DataRow dr = ds.NewRow();
-                                    dr.ItemArray = new Object[] { p.PropertyName, p.VTType, p.Value };
+                                    dr.ItemArray = new object[] { p.PropertyName, p.VTType, p.Value };
                                     ds.Rows.Add(dr);
                                 }
                             }
@@ -474,9 +474,9 @@ namespace StructuredStorageExplorer
                             {
                                 DataTable ds2 = new DataTable();
 
-                                ds2.Columns.Add("Name", typeof(String));
-                                ds2.Columns.Add("Type", typeof(String));
-                                ds2.Columns.Add("Value", typeof(String));
+                                ds2.Columns.Add("Name", typeof(string));
+                                ds2.Columns.Add("Type", typeof(string));
+                                ds2.Columns.Add("Value", typeof(string));
 
                                 foreach (var p in c.UserDefinedProperties.Properties)
                                 {
@@ -485,14 +485,14 @@ namespace StructuredStorageExplorer
                                         for (int h = 0; h < ((IList)p.Value).Count; h++)
                                         {
                                             DataRow dr = ds2.NewRow();
-                                            dr.ItemArray = new Object[] { p.PropertyName, p.VTType, ((IList)p.Value)[h] };
+                                            dr.ItemArray = new object[] { p.PropertyName, p.VTType, ((IList)p.Value)[h] };
                                             ds2.Rows.Add(dr);
                                         }
                                     }
                                     else
                                     {
                                         DataRow dr = ds2.NewRow();
-                                        dr.ItemArray = new Object[] { p.PropertyName, p.VTType, p.Value };
+                                        dr.ItemArray = new object[] { p.PropertyName, p.VTType, p.Value };
                                         ds2.Rows.Add(dr);
                                     }
                                 }
@@ -539,7 +539,7 @@ namespace StructuredStorageExplorer
                 fs = null;
 
                 treeView1.Nodes.Clear();
-                fileNameLabel.Text = String.Empty;
+                fileNameLabel.Text = string.Empty;
 
                 MessageBox.Show("Internal error: " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

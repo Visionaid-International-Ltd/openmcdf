@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OpenMcdf.Extensions.OLEProperties
 {
@@ -63,7 +62,7 @@ namespace OpenMcdf.Extensions.OLEProperties
 
     public static class Extensions
     {
-        public static String GetDescription(this uint identifier, ContainerType map, Dictionary<uint, string> customDict = null)
+        public static string GetDescription(this uint identifier, ContainerType map, Dictionary<uint, string> customDict = null)
         {
             Dictionary<uint, string> NameDictionary = new Dictionary<uint, string>();
 
