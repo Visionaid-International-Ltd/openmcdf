@@ -76,13 +76,10 @@ namespace OpenMcdf
                 int itemIndex = index / SLICE_SIZE;
                 int itemOffset = index % SLICE_SIZE;
 
-                if ((index > -1) && (index < count))
-                {
-                    return (Sector)largeArraySlices[itemIndex][itemOffset];
-                }
-                else
-                    throw new CFException("Argument Out of Range, possibly corrupted file", new ArgumentOutOfRangeException("index", index, "Argument out of range"));
+                if (index <= -1 || index >= count)
+                    throw new ArgumentOutOfRangeException("Argument Out of Range, possibly corrupted file", nameof(index));
 
+                return (Sector)largeArraySlices[itemIndex][itemOffset];
             }
 
             set
@@ -90,12 +87,10 @@ namespace OpenMcdf
                 int itemIndex = index / SLICE_SIZE;
                 int itemOffset = index % SLICE_SIZE;
 
-                if (index > -1 && index < count)
-                {
-                    largeArraySlices[itemIndex][itemOffset] = value;
-                }
-                else
+                if (index <= -1 || index >= count)
                     throw new ArgumentOutOfRangeException("index", index, "Argument out of range");
+
+                largeArraySlices[itemIndex][itemOffset] = value;
             }
         }
 

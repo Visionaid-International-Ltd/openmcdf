@@ -119,7 +119,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex is CFException);
+                Assert.IsTrue(ex is ArgumentOutOfRangeException);
             }
 
             try
@@ -128,7 +128,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex is CFException);
+                Assert.IsTrue(ex is ArgumentOutOfRangeException);
             }
         }
 

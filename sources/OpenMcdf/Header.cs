@@ -7,6 +7,7 @@
  * The Initial Developer of the Original Code is Federico Blaseotto.*/
 
 
+using System;
 using System.IO;
 
 namespace OpenMcdf
@@ -202,7 +203,7 @@ namespace OpenMcdf
                     break;
 
                 default:
-                    throw new CFException("Invalid Compound File Format version");
+                    throw new NotSupportedException("Unsupported Compound File Format version");
 
 
             }

@@ -11,6 +11,7 @@
 using RedBlackTree;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 
 namespace OpenMcdf
@@ -1568,7 +1569,7 @@ namespace OpenMcdf
                     return GetMiniSectorChain(secID);
 
                 default:
-                    throw new CFException("Unsupported chain type");
+                    throw new InvalidEnumArgumentException(nameof(chainType), (int)chainType, typeof(SectorType));
             }
         }
 
@@ -1916,7 +1917,7 @@ namespace OpenMcdf
         public void Save(string fileName)
         {
             if (_disposed)
-                throw new CFException("Compound File closed: cannot save data");
+                throw new ObjectDisposedException("Compound File closed: cannot save data");
 
             FileStream fs = null;
 
@@ -1950,10 +1951,6 @@ namespace OpenMcdf
 
                 fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
                 Save(fs);
-            }
-            catch (Exception ex)
-            {
-                throw new CFException("Error saving file [" + fileName + "]", ex);
             }
             finally
             {
@@ -1995,9 +1992,7 @@ namespace OpenMcdf
                 throw new ObjectDisposedException("Compound File closed: cannot save data");
 
             if (!stream.CanSeek)
-                throw new CFException("Cannot save on a non-seekable stream");
-
-
+                throw new ArgumentException("Stream does not support seeking", nameof(stream));
 
             CheckForLockSector();
             int sSize = GetSectorSize();
@@ -2046,7 +2041,7 @@ namespace OpenMcdf
             catch (Exception ex)
             {
                 sourceStream?.Close();
-                throw new CFException("Internal error while saving compound file to stream ", ex);
+                throw ex;
             }
         }
 
@@ -2535,9 +2530,9 @@ namespace OpenMcdf
                     sView.Read(result, 0, result.Length);
                 }
             }
-            catch
+            catch // TODO: catch specific exceptions
             {
-                throw new CFException("Cannot get data for SID");
+                throw new KeyNotFoundException("Cannot get data for SID");
             }
             return result;
         }
@@ -2546,7 +2541,8 @@ namespace OpenMcdf
             if (_disposed)
                 throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (sid < 0)
-                throw new CFException("Invalid SID");
+                throw new ArgumentException("Invalid SID", nameof(sid));
+
             IDirectoryEntry de = directoryEntries[sid];
             return de.StorageCLSID;
         }
@@ -2555,7 +2551,8 @@ namespace OpenMcdf
             if (_disposed)
                 throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (sid < 0)
-                throw new CFException("Invalid SID");
+                throw new ArgumentException("Invalid SID", nameof(sid));
+
             Guid g = Guid.Empty;
             //find first storage containing a non-zero CLSID before SID in directory structure
             for (int i = sid - 1; i >= 0; i--)
@@ -2582,7 +2579,7 @@ namespace OpenMcdf
         internal void InvalidateDirectoryEntry(int sid)
         {
             if (sid >= directoryEntries.Count)
-                throw new CFException("Invalid SID of the directory entry to remove");
+                throw new ArgumentException("Invalid SID of the directory entry to remove", nameof(sid));
 
             ResetDirectoryEntry(sid);
         }
@@ -2795,7 +2792,7 @@ namespace OpenMcdf
             if (_disposed)
                 throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (id < 0)
-                throw new CFException("Invalid Storage ID");
+                throw new ArgumentException("Invalid Storage ID", nameof(id));
             return directoryEntries[id].Name;
         }
 
@@ -2804,7 +2801,7 @@ namespace OpenMcdf
             if (_disposed)
                 throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (id < 0)
-                throw new CFException("Invalid Storage ID");
+                throw new ArgumentException("Invalid Storage ID", nameof(id));
             return directoryEntries[id].StgType;
         }
 
@@ -2850,7 +2847,7 @@ namespace OpenMcdf
             CompoundFile cf = new CompoundFile(s);
 
             if (cf.header.MajorVersion != (ushort)CFSVersion.Ver_3)
-                throw new CFException("Current implementation of free space compression does not support version 4 of Compound File Format");
+                throw new NotSupportedException("Current implementation of free space compression does not support version 4 of Compound File Format");
 
             using (CompoundFile tempCF = new CompoundFile((CFSVersion)cf.header.MajorVersion, cf.Configuration))
             {

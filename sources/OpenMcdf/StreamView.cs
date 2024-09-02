@@ -34,10 +34,10 @@ namespace OpenMcdf
         public StreamView(List<Sector> sectorChain, int sectorSize, Stream stream)
         {
             if (sectorChain == null)
-                throw new CFException("Sector Chain cannot be null");
+                throw new ArgumentNullException(nameof(sectorChain));
 
             if (sectorSize <= 0)
-                throw new CFException("Sector size must be greater than zero");
+                throw new ArgumentOutOfRangeException("Sector size must be greater than zero", nameof(sectorSize));
 
             this.sectorChain = sectorChain;
             this.sectorSize = sectorSize;
