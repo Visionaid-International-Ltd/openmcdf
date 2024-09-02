@@ -46,25 +46,25 @@ namespace OpenMcdf
     /// or not supported COM/OLE Structured storage version.
     /// </summary>
     [Serializable]
-    public class CFFileFormatException : CFException
+    public class FileFormatException : FormatException
     {
-        public CFFileFormatException()
+        public FileFormatException()
             : base()
         {
         }
 
-        protected CFFileFormatException(SerializationInfo info, StreamingContext context)
+        protected FileFormatException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
 
-        public CFFileFormatException(string message)
+        public FileFormatException(string message)
             : base(message, null)
         {
 
         }
 
-        public CFFileFormatException(string message, Exception innerException)
+        public FileFormatException(string message, Exception innerException)
             : base(message, innerException)
         {
 

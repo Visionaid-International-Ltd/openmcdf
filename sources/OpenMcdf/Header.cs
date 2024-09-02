@@ -287,7 +287,7 @@ namespace OpenMcdf
         private void CheckVersion()
         {
             if (this.majorVersion != 3 && this.majorVersion != 4)
-                throw new CFFileFormatException("Unsupported Binary File Format version: OpenMcdf only supports Compound Files with major version equal to 3 or 4 ");
+                throw new FileFormatException("Unsupported Binary File Format version: OpenMcdf only supports Compound Files with major version equal to 3 or 4 ");
         }
 
         /// <summary>
@@ -300,7 +300,7 @@ namespace OpenMcdf
             for (int i = 0; i < headerSignature.Length; i++)
             {
                 if (headerSignature[i] != OLE_CFS_SIGNATURE[i])
-                    throw new CFFileFormatException("Invalid OLE structured storage file");
+                    throw new FileFormatException("Invalid OLE structured storage file");
             }
         }
     }

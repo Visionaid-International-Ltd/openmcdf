@@ -1057,7 +1057,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception e)
             {
-                Assert.IsTrue(e is CFFileFormatException);
+                Assert.IsTrue(e is FileFormatException);
             }
         }
 
