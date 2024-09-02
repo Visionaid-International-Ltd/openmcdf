@@ -127,7 +127,7 @@ namespace OpenMcdf
         /// </code>
         /// </example>
         /// <returns>Array of byte containing stream data</returns>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">
+        /// <exception cref="T:ObjectDisposedException">
         /// Raised when the owner compound file has been closed.
         /// </exception>
         public byte[] GetData()
@@ -162,7 +162,7 @@ namespace OpenMcdf
         ///  Assert.IsTrue(Helpers.CompareBuffer(b, buffer));
         /// </code>
         /// </example>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">
+        /// <exception cref="T:ObjectDisposedException">
         /// Raised when the owner compound file has been closed.
         /// </exception>
         public int Read(byte[] buffer, long position, int count)
@@ -198,7 +198,7 @@ namespace OpenMcdf
         ///  Assert.IsTrue(Helpers.CompareBuffer(b, buffer));
         /// </code>
         /// </example>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">
+        /// <exception cref="T:ObjectDisposedException">
         /// Raised when the owner compound file has been closed.
         /// </exception>
         internal int Read(byte[] buffer, long position, int offset, int count)

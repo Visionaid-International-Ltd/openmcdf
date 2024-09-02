@@ -42,38 +42,6 @@ namespace OpenMcdf
     }
 
     /// <summary>
-    /// Raised when a data setter/getter method is invoked
-    /// on a stream or storage object after the disposal of the owner
-    /// compound file object.
-    /// </summary>
-    [Serializable]
-    public class CFDisposedException : CFException
-    {
-        public CFDisposedException()
-            : base()
-        {
-        }
-
-        protected CFDisposedException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
-        public CFDisposedException(string message)
-            : base(message, null)
-        {
-
-        }
-
-        public CFDisposedException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-
-        }
-
-    }
-
-    /// <summary>
     /// Raised when opening a file with invalid header
     /// or not supported COM/OLE Structured storage version.
     /// </summary>

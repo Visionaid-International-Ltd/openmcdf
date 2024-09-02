@@ -47,7 +47,7 @@ namespace OpenMcdf
         protected void CheckDisposed()
         {
             if (compoundFile.IsClosed)
-                throw new CFDisposedException("Owner Compound file has been closed and owned items have been invalidated");
+                throw new ObjectDisposedException("Owner Compound file has been closed and owned items have been invalidated");
         }
 
         protected CFItem()

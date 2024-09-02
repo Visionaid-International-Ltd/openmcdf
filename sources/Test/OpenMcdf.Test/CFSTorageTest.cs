@@ -396,7 +396,7 @@ namespace OpenMcdf.Test
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex is CFDisposedException);
+                Assert.IsTrue(ex is ObjectDisposedException);
             }
         }
 

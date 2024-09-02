@@ -104,7 +104,7 @@ namespace OpenMcdf
         /// <param name="streamName">The new stream name</param>
         /// <returns>The new <see cref="T:OpenMcdf.CFStream">stream</see> reference</returns>
         /// <exception cref="T:OpenMcdf.CFDuplicatedItemException">Raised when adding an item with the same name of an existing one</exception>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised when adding a stream to a closed compound file</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised when adding a stream to a closed compound file</exception>
         /// <exception cref="T:OpenMcdf.CFException">Raised when adding a stream with null or empty name</exception>
         /// <example>
         /// <code>
@@ -160,7 +160,7 @@ namespace OpenMcdf
         /// </summary>
         /// <param name="streamName">Name of the stream to look for</param>
         /// <returns>A stream reference if existing</returns>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised if trying to delete item from a closed compound file</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised if trying to delete item from a closed compound file</exception>
         /// <exception cref="T:OpenMcdf.CFItemNotFound">Raised if item to delete is not found</exception>
         /// <example>
         /// <code>
@@ -239,7 +239,7 @@ namespace OpenMcdf
                     result = true;
                 }
             }
-            catch (CFDisposedException)
+            catch (ObjectDisposedException)
             {
                 result = false;
 
@@ -253,7 +253,7 @@ namespace OpenMcdf
         /// </summary>
         /// <param name="streamName">Name of the stream to look for</param>
         /// <returns>A stream reference if found, else null</returns>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised if trying to delete item from a closed compound file</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised if trying to delete item from a closed compound file</exception>
         /// <example>
         /// <code>
         /// String filename = "report.xls";
@@ -298,7 +298,7 @@ namespace OpenMcdf
         /// </summary>
         /// <param name="storageName">Name of the storage to look for</param>
         /// <returns>A storage reference if existing.</returns>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised if trying to delete item from a closed compound file</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised if trying to delete item from a closed compound file</exception>
         /// <exception cref="T:OpenMcdf.CFItemNotFound">Raised if item to delete is not found</exception>
         /// <example>
         /// <code>
@@ -334,7 +334,7 @@ namespace OpenMcdf
         /// </summary>
         /// <param name="storageName">Name of the storage to look for</param>
         /// <returns>A storage reference if found else null</returns>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised if trying to delete item from a closed compound file</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised if trying to delete item from a closed compound file</exception>
         /// <example>
         /// <code>
         /// 
@@ -404,7 +404,7 @@ namespace OpenMcdf
                 }
 
             }
-            catch (CFDisposedException)
+            catch (ObjectDisposedException)
             {
                 result = false;
             }
@@ -419,7 +419,7 @@ namespace OpenMcdf
         /// <param name="storageName">The new storage name</param>
         /// <returns>Reference to the new <see cref="T:OpenMcdf.CFStorage">storage</see></returns>
         /// <exception cref="T:OpenMcdf.CFDuplicatedItemException">Raised when adding an item with the same name of an existing one</exception>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised when adding a storage to a closed compound file</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised when adding a storage to a closed compound file</exception>
         /// <exception cref="T:OpenMcdf.CFException">Raised when adding a storage with null or empty name</exception>
         /// <example>
         /// <code>
@@ -471,7 +471,7 @@ namespace OpenMcdf
         /// <summary>
         /// Visit all entities contained in the storage applying a user provided action
         /// </summary>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised when visiting items of a closed compound file</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised when visiting items of a closed compound file</exception>
         /// <param name="action">User <see cref="T:OpenMcdf.VisitedEntryAction">action</see> to apply to visited entities</param>
         /// <param name="recursive"> Visiting recursion level. True means substorages are visited recursively, false indicates that only the direct children of this storage are visited</param>
         /// <example>
@@ -539,7 +539,7 @@ namespace OpenMcdf
         /// cf.Close();
         /// </code>
         /// </example>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised if trying to delete item from a closed compound file</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised if trying to delete item from a closed compound file</exception>
         /// <exception cref="T:OpenMcdf.CFItemNotFound">Raised if item to delete is not found</exception>
         /// <exception cref="T:OpenMcdf.CFException">Raised if trying to delete root storage</exception>
         public void Delete(string entryName)

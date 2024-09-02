@@ -450,7 +450,7 @@ namespace OpenMcdf
         public void Commit(bool releaseMemory)
         {
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot commit data");
+                throw new ObjectDisposedException("Compound File closed: cannot commit data");
 
             if (updateMode != CFSUpdateMode.Update)
                 throw new CFInvalidOperation("Cannot commit data in Read-Only update mode");
@@ -1974,7 +1974,7 @@ namespace OpenMcdf
         /// </remarks>
         /// <param name="stream">The stream to save compound File to</param>
         /// <exception cref="T:OpenMcdf.CFException">Raised if destination stream is not seekable</exception>
-        /// <exception cref="T:OpenMcdf.CFDisposedException">Raised if Compound File Storage has been already disposed</exception>
+        /// <exception cref="T:ObjectDisposedException">Raised if Compound File Storage has been already disposed</exception>
         /// <example>
         /// <code>
         ///    MemoryStream ms = new MemoryStream(size);
@@ -1993,7 +1993,7 @@ namespace OpenMcdf
         public void Save(Stream stream)
         {
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot save data");
+                throw new ObjectDisposedException("Compound File closed: cannot save data");
 
             if (!stream.CanSeek)
                 throw new CFException("Cannot save on a non-seekable stream");
@@ -2477,7 +2477,7 @@ namespace OpenMcdf
         {
 
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot access data");
+                throw new ObjectDisposedException("Compound File closed: cannot access data");
 
             byte[] result = null;
 
@@ -2513,7 +2513,7 @@ namespace OpenMcdf
         public byte[] GetDataBySID(int sid)
         {
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot access data");
+                throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (sid < 0)
                 return null;
             byte[] result = null;
@@ -2545,7 +2545,7 @@ namespace OpenMcdf
         public Guid getGuidBySID(int sid)
         {
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot access data");
+                throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (sid < 0)
                 throw new CFException("Invalid SID");
             IDirectoryEntry de = directoryEntries[sid];
@@ -2554,7 +2554,7 @@ namespace OpenMcdf
         public Guid getGuidForStream(int sid)
         {
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot access data");
+                throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (sid < 0)
                 throw new CFException("Invalid SID");
             Guid g = Guid.Empty;
@@ -2614,7 +2614,7 @@ namespace OpenMcdf
         /// <remarks>
         /// When the <see cref="T:OpenMcdf.CompoundFile.Close()">Close</see> method is called,
         /// all the associated stream and storage objects are invalidated:
-        /// any operation invoked on them will produce a <see cref="T:OpenMcdf.CFDisposedException">CFDisposedException</see>.
+        /// any operation invoked on them will produce a <see cref="T:ObjectDisposedException">ObjectDisposedException</see>.
         /// </remarks>
         /// </summary>
         /// <example>
@@ -2634,7 +2634,7 @@ namespace OpenMcdf
         ///    }
         ///    catch (Exception ex)
         ///    {
-        ///        Assert.IsTrue(ex is CFDisposedException);
+        ///        Assert.IsTrue(ex is ObjectDisposedException);
         ///    }
         /// </code>
         /// </example>
@@ -2787,14 +2787,14 @@ namespace OpenMcdf
         public int GetNumDirectories()
         {
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot access data");
+                throw new ObjectDisposedException("Compound File closed: cannot access data");
             return directoryEntries.Count;
         }
 
         public string GetNameDirEntry(int id)
         {
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot access data");
+                throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (id < 0)
                 throw new CFException("Invalid Storage ID");
             return directoryEntries[id].Name;
@@ -2803,7 +2803,7 @@ namespace OpenMcdf
         public StgType GetStorageType(int id)
         {
             if (_disposed)
-                throw new CFDisposedException("Compound File closed: cannot access data");
+                throw new ObjectDisposedException("Compound File closed: cannot access data");
             if (id < 0)
                 throw new CFException("Invalid Storage ID");
             return directoryEntries[id].StgType;
