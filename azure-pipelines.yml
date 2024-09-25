@@ -1,37 +1,36 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
 trigger:
-- master
+  - master
+
+pr:
+  - master
 
 pool:
-  vmImage: 'Ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  libFramework: 'netstandard2.0'
-  appFramework: 'net6.0'
-  # pay attention to slashes
-  testsProject:  'sources/Test/OpenMcdf.Test/OpenMcdf.Test.csproj'
-  extensionTestsProject: 'sources/Test/OpenMcdf.Extensions.Test/OpenMcdf.Extensions.Test.csproj'
-  buildProject: 'sources/OpenMcdf/OpenMcdf.csproj'
-  # without filter it will timeout in azure AFTER 60+ min
-  testFilter: 'Name!=Test_FIX_BUG_GH_14&Name!=Test_FIX_BUG_GH_15'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration) -f $(libFramework) $(buildProject)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: NuGetToolInstaller@1
 
-- script: dotnet test -f $(appFramework)  $(testsProject) --filter="$(testFilter)" --collect:"Code Coverage"  --logger trx
-  displayName: 'OpenMcdf unit tests'
-
-- script: dotnet test $(extensionTestsProject) --logger trx
-  displayName: 'OpenMcdf.Extensions unit tests'
-
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
+- task: NuGetCommand@2
   inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
