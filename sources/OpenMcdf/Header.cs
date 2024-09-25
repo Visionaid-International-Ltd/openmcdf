@@ -61,13 +61,13 @@ namespace OpenMcdf
             switch (version)
             {
                 case 3:
-                    this.MajorVersion = 3;
-                    this.SectorShift = 0x0009;
+                    MajorVersion = 3;
+                    SectorShift = 0x0009;
                     break;
 
                 case 4:
-                    this.MajorVersion = 4;
-                    this.SectorShift = 0x000C;
+                    MajorVersion = 4;
+                    SectorShift = 0x000C;
                     break;
 
                 default:
@@ -142,7 +142,7 @@ namespace OpenMcdf
 
             for (int i = 0; i < 109; i++)
             {
-                this.DIFAT[i] = rw.ReadInt32();
+                DIFAT[i] = rw.ReadInt32();
             }
 
             rw.Close();
@@ -150,7 +150,7 @@ namespace OpenMcdf
 
         private void CheckVersion()
         {
-            if (this.MajorVersion != 3 && this.MajorVersion != 4)
+            if (MajorVersion != 3 && MajorVersion != 4)
                 throw new CFFileFormatException("Unsupported Binary File Format version: OpenMcdf only supports Compound Files with major version equal to 3 or 4 ");
         }
 
@@ -165,6 +165,33 @@ namespace OpenMcdf
             {
                 if (HeaderSignature[i] != OLE_CFS_SIGNATURE[i])
                     throw new CFFileFormatException("Invalid OLE structured storage file");
+            }
+        }
+
+        /// <summary>
+        /// Validate header values specified in [MS-CFB] document
+        /// </summary>
+        /// <exception cref="CFCorruptedFileException">If one of the validation checks fails a <see cref="T:OpenMcdf.CFCorruptedFileException">CFCorruptedFileException</see> exception will be thrown</exception>
+        internal void ThrowIfInvalid()
+        {
+            if (MiniSectorShift != 6)
+            {
+                throw new CFCorruptedFileException("Mini sector Shift MUST be 0x06");
+            }
+
+            if ((MajorVersion == 0x0003 && SectorShift != 9) || (MajorVersion == 0x0004 && SectorShift != 0x000c))
+            {
+                throw new CFCorruptedFileException("Sector Shift MUST be 0x0009 for Major Version 3 and 0x000c for Major Version 4");
+            }
+
+            if (MinSizeStandardStream != 4096)
+            {
+                throw new CFCorruptedFileException("Mini Stream Cut off size MUST be 4096 byte");
+            }
+
+            if (ByteOrder != 0xFFFE)
+            {
+                throw new CFCorruptedFileException("Byte order MUST be little endian (0xFFFE)");
             }
         }
     }

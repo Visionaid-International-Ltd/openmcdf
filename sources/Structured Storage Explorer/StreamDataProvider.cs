@@ -17,9 +17,9 @@ namespace StructuredStorageExplorer
         bool _hasChanges;
 
         /// <summary>
-        /// Initializes a new instance of the DynamicByteProvider class.
+        /// Initializes a new instance of the StreamDataProvider class.
         /// </summary>
-        /// <param name="bytes"></param>
+        /// <param name="modifiedStream"></param>
         public StreamDataProvider(CFStream modifiedStream)
         {
             Bytes = new ByteCollection(modifiedStream.GetData());
@@ -65,7 +65,7 @@ namespace StructuredStorageExplorer
         {
             _hasChanges = false;
 
-            _modifiedStream.SetData(this.Bytes.ToArray());
+            _modifiedStream.SetData(Bytes.ToArray());
         }
 
         /// <summary>

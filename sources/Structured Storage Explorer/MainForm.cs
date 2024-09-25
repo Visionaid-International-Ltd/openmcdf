@@ -162,7 +162,7 @@ namespace StructuredStorageExplorer
         /// </summary>
         /// <param name="node">Current TreeNode</param>
         /// <param name="cfs">Current storage associated with node</param>
-        private void AddNodes(TreeNode node, CFStorage cfs)
+        private static void AddNodes(TreeNode node, CFStorage cfs)
         {
             Action<CFItem> va = delegate (CFItem target)
             {
@@ -265,7 +265,7 @@ namespace StructuredStorageExplorer
             saveFileDialog1.FilterIndex = 2;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                cf.Save(saveFileDialog1.FileName);
+                cf.SaveAs(saveFileDialog1.FileName);
             }
         }
 
@@ -389,11 +389,11 @@ namespace StructuredStorageExplorer
 
                 if (n != null)
                 {
-                    if (this.hexEditor.ByteProvider != null && this.hexEditor.ByteProvider.HasChanges())
+                    if (hexEditor.ByteProvider != null && hexEditor.ByteProvider.HasChanges())
                     {
                         if (MessageBox.Show("Do you want to save pending changes ?", "Save changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                         {
-                            this.hexEditor.ByteProvider.ApplyChanges();
+                            hexEditor.ByteProvider.ApplyChanges();
                         }
                     }
 
@@ -495,11 +495,11 @@ namespace StructuredStorageExplorer
                     CFStream targetStream = n.Tag as CFStream;
                     if (targetStream != null)
                     {
-                        this.hexEditor.ByteProvider = new StreamDataProvider(targetStream);
+                        hexEditor.ByteProvider = new StreamDataProvider(targetStream);
                     }
                     else
                     {
-                        this.hexEditor.ByteProvider = null;
+                        hexEditor.ByteProvider = null;
                     }
                 }
             }
@@ -524,11 +524,11 @@ namespace StructuredStorageExplorer
 
         private void closeStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (this.hexEditor.ByteProvider != null && this.hexEditor.ByteProvider.HasChanges())
+            if (hexEditor.ByteProvider != null && hexEditor.ByteProvider.HasChanges())
             {
                 if (MessageBox.Show("Do you want to save pending changes ?", "Save changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    this.hexEditor.ByteProvider.ApplyChanges();
+                    hexEditor.ByteProvider.ApplyChanges();
                 }
             }
 
