@@ -125,5 +125,24 @@ namespace OpenMcdf.Extensions.Test
                 }
             }
         }
+
+        [TestMethod]
+        public void Test_BUFFERED_STREAM_DOES_NOT_CRASH()
+        {
+            using CompoundFile cf = new(CFSVersion.Ver_4, CFSConfiguration.Default);
+
+            CFStream cfStream = cf.RootStorage.AddStream("MyStream");
+            using Stream stream = cfStream.AsIOStream();
+            const int BufferLength = 4096 * 21;
+            var buffer = Helpers.GetBuffer(BufferLength);
+            stream.Write(buffer, 0, buffer.Length);
+            stream.Position = 0;
+
+            Assert.AreEqual(BufferLength, cfStream.Size);
+
+            using MemoryStream memoryStream = new();
+            using BufferedStream bufferedStream = new(stream);
+            bufferedStream.CopyTo(memoryStream);
+        }
     }
 }
