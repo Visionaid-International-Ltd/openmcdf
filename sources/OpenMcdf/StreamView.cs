@@ -91,8 +91,11 @@ namespace OpenMcdf
             int nRead = 0;
 
             // Don't try to read more bytes than this stream contains.
-            long intMax = Math.Min(int.MaxValue, length);
-            count = Math.Min((int)intMax, count);
+            long maxReadable = Math.Min(int.MaxValue, length - position);
+            count = MathEx.Clamp(count, 0, (int)maxReadable);
+
+            if (count == 0)
+                return 0;
 
             if (BaseSectorChain != null && BaseSectorChain.Count > 0)
             {
