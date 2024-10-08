@@ -474,25 +474,35 @@ namespace OpenMcdf.Test
         }
 
         [TestMethod]
-        public void Test_INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS()
+        [DataRow(0)]
+        [DataRow(63)]
+        [DataRow(64)]
+        [DataRow(65)]
+        [DataRow(511)]
+        [DataRow(512)]
+        [DataRow(513)]
+        [DataRow(4095)]
+        [DataRow(4096)]
+        [DataRow(4097)]
+        public void Test_INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS(int size)
         {
-            Random r = new Random();
-
-            for (int i = r.Next(1, 100); i < 1024 * 1024 * 70; i = i << 1)
-            {
-                SingleWriteReadMatching(i + r.Next(0, 3));
-            }
+            SingleWriteReadMatching(size);
         }
 
         [TestMethod]
-        public void Test_INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS_STREAM()
+        [DataRow(0)]
+        [DataRow(63)]
+        [DataRow(64)]
+        [DataRow(65)]
+        [DataRow(511)]
+        [DataRow(512)]
+        [DataRow(513)]
+        [DataRow(4095)]
+        [DataRow(4096)]
+        [DataRow(4097)]
+        public void Test_INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS_STREAM(int size)
         {
-            Random r = new Random();
-
-            for (int i = r.Next(1, 100); i < 1024 * 1024 * 70; i = i << 1)
-            {
-                SingleWriteReadMatchingSTREAMED(i + r.Next(0, 3));
-            }
+            SingleWriteReadMatchingSTREAMED(size);
         }
 
         [TestMethod]
@@ -556,7 +566,7 @@ namespace OpenMcdf.Test
 
         private static void SingleWriteReadMatching(int size)
         {
-            string filename = "INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS.cfs";
+            string filename = $"INCREMENTAL_SIZE_MULTIPLE_WRITE_AND_READ_CFS_{size}.cfs";
 
             File.Delete(filename);
 
