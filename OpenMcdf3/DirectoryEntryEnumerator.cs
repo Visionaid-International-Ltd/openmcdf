@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 
 namespace OpenMcdf3;
 
@@ -126,6 +127,7 @@ internal sealed class DirectoryEntryEnumerator : IEnumerator<DirectoryEntry>
 
         CfbBinaryWriter writer = ioContext.Writer;
         writer.Position = fatChainEnumerator.CurrentSector.Position + (entryIndex * DirectoryEntry.Length);
+        Debug.WriteLine($"Write directory to {writer.Position}");
         writer.Write(entry);
     }
 
